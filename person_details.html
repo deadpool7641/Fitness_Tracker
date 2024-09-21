@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Enter Your Details</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+    <h1>Enter Your Details</h1>
+    <form method="POST" action="{{ url_for('person_details') }}">
+        <div>
+            <label for="age">Age:</label>
+            <input type="number" id="age" name="age" value="{{ person_details.age if person_details else '' }}" required>
+        </div>
+
+        <div>
+            <label for="weight">Weight (kg):</label>
+            <input type="number" step="0.1" id="weight" name="weight" value="{{ person_details.weight if person_details else '' }}" required>
+        </div>
+
+        <div>
+            <label for="height">Height (cm):</label>
+            <input type="number" step="0.1" id="height" name="height" value="{{ person_details.height if person_details else '' }}" required>
+        </div>
+
+        <div>
+            <label for="fitness_goal">Fitness Goal:</label>
+            <select id="fitness_goal" name="fitness_goal" required>
+                <option value="weight_loss" {% if person_details and person_details.fitness_goal == 'weight_loss' %}selected{% endif %}>Weight Loss</option>
+                <option value="weight_gain" {% if person_details and person_details.fitness_goal == 'weight_gain' %}selected{% endif %}>Weight Gain</option>
+                <option value="maintain" {% if person_details and person_details.fitness_goal == 'maintain' %}selected{% endif %}>Maintain</option>
+            </select>
+        </div>
+
+        <div>
+            <label for="gender">Gender:</label>
+            <select id="gender" name="gender" required>
+                <option value="male" {% if person_details and person_details.gender == 'male' %}selected{% endif %}>Male</option>
+                <option value="female" {% if person_details and person_details.gender == 'female' %}selected{% endif %}>Female</option>
+            </select>
+        </div>
+
+        <button type="submit">Save Details</button>
+    </form>
+</body>
+</html>
